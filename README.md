@@ -18,45 +18,43 @@
 
 - has_many :items
 - has_many :orders
-- has_many :comments
 
 
 ## items テーブル
 
 | Column            | Type       | Options     |
 | ----------------- | ---------- | ----------- |
-| price             |   string   | null: false |
-| item_title        | references | null: false |
-| item_description  |    text    | null: false |
+| price             | integer    | null: false |
+| item_title        | string     | null: false |
+| item_description  | text       | null: false |
 | user              | references | null: false |
 | category_id       | integer    | null: false |
 | condition_id      | integer    | null: false |
 | shipping_cost_id  | integer    | null: false |
-| shipping_place_id | integer    | null: false |
+| prefecture_id     | integer    | null: false |
 | shipping_date_id  | integer    | null: false |
 
 ### Association
 
 - belongs_to :user
-- has_many :comments
 - has_one :order
 
 
 ## addresses テーブル
 
-| Column      | Type       | Options     |
-| ----------- | ---------- | ----------- |
-| postal_code | string     | null: false |
-| prefecture  | string     | null: false |
-| city        | string     | null: false |
-| street      | string     | null: false |
-| building    | string     |             |
-| phone       | string     | null: false |
-
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postal_code   | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| street        | string     | null: false                    |
+| building      | string     |                                |
+| phone         | string     | null: false                    |
+| orders        | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :orders
+- belongs_to :order
 
 
 ## orders テーブル
@@ -65,12 +63,13 @@
 | --------- | ---------- | ------------------------------ |
 | user      | references | null: false, foreign_key: true |
 | item      | references | null: false, foreign_key: true |
+| address   | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :card
+- belongs_to :item
+- belongs_to :user
 - belongs_to :address
-
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
