@@ -50,7 +50,7 @@
 | street        | string     | null: false                    |
 | building      | string     |                                |
 | phone         | string     | null: false                    |
-| orders        | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -63,13 +63,12 @@
 | --------- | ---------- | ------------------------------ |
 | user      | references | null: false, foreign_key: true |
 | item      | references | null: false, foreign_key: true |
-| address   | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :item
 - belongs_to :user
-- belongs_to :address
+- has_one :address
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
