@@ -3,137 +3,72 @@
 
 ## users テーブル
 
-| Column             | Type       | Options     |
-| ------------------ | ---------- | ----------- |
-| nickname           |   string   | null: false |
-| first_name         |   string   | null: false |
-| last_name          |   string   | null: false |
-| email              |   string   | null: false |
-| encrypted_password |   string   | null: false |
-| birthday           |    data    | null: false |
-| user_id            | references | null: false |
-| profile            |   string   | null: false |
+| Column             | Type       | Options                   |
+| ------------------ | ---------- | ------------------------- |
+| nickname           |   string   | null: false               |
+| first_name         |   string   | null: false               |
+| last_name          |   string   | null: false               |
+| first_name_kana    |   string   | null: false               |
+| last_name_kana     |   string   | null: false               |
+| email              |   string   | null: false, unique: true |
+| encrypted_password |   string   | null: false               |
+| birthday           |    data    | null: false               |
 
 ### Association
 
-- has_many :room_users
-- has_many :rooms, through: :room_users
-- has_many :messages
-
 - has_many :items
-- has_many :orders, foreign_key: 'buyer_id'
-- has_many :selling_items, class_name: 'Item', foreign_key: 'seller_id'
-- has_many :ordercomments
-- has_many :user_transactions
-- has_many :transactions, through: :user_transactions
+- has_many :orders
+
 
 ## items テーブル
 
-| Column           | Type       | Options     |
-| ---------------- | ---------- | ----------- |
-| price            |   string   | null: false |
-| item_title       | references | null: false |
-| item_description |    text    | null: false |
-| user_id          | references | null: false |
+| Column            | Type       | Options     |
+| ----------------- | ---------- | ----------- |
+| price             | integer    | null: false |
+| item_title        | string     | null: false |
+| item_description  | text       | null: false |
+| user              | references | null: false |
+| category_id       | integer    | null: false |
+| condition_id      | integer    | null: false |
+| shipping_cost_id  | integer    | null: false |
+| prefecture_id     | integer    | null: false |
+| shipping_date_id  | integer    | null: false |
 
 ### Association
 
 - belongs_to :user
-- has_many :room_users
-- has_many :users, through: :room_users
-- has_many :messages
-- has_many :comments
-
 - has_one :order
-- has_one :ordercomment
 
-## comments テーブル
-
-| Column   | Type       | Options                        |
-| -------- | ---------- | ------------------------------ |
-| comment  |    text    | null: false                    |
-| user_id  | references | null: false, foreign_key: true |
-| item_id  | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :item
-- belongs_to :user
 
 ## addresses テーブル
 
-| Column      | Type       | Options                        |
-| ----------- | ---------- | ------------------------------ |
-| postal_code | string     |                                |
-| state       | string     | null: false, foreign_key: true |
-| city        | string     | null: false, foreign_key: true |
-| street      | string     | null: false, foreign_key: true |
-| building    | string     | null: false, foreign_key: true |
-| phone       | string     | null: false, foreign_key: true |
-| first_name  | string     | null: false, foreign_key: true |
-| last_name   | string     | null: false, foreign_key: true |
-| user_id     | references | null: false, foreign_key: true |
-
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postal_code   | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| street        | string     | null: false                    |
+| building      | string     |                                |
+| phone         | string     | null: false                    |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
+- belongs_to :order
 
-## ordercomments テーブル
-
-| Column   | Type       | Options                        |
-| -------- | ---------- | ------------------------------ |
-| comment  |    text    | null: false                    |
-| user_id  | references | null: false, foreign_key: true |
-| item_id  | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :item
-- belongs_to :user
-
-## user_transactions テーブル
-
-| Column           | Type       | Options                        |
-| ---------------- | ---------- | ------------------------------ |
-| user_id          | references | null: false, foreign_key: true |
-| transactions_id  | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :transaction
-- belongs_to :user
-
-## transactions テーブル
-
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| review    | string     | null: false, foreign_key: true |
-| confirm   | references | null: false, foreign_key: true |
-| comment   | string     | null: false, foreign_key: true |
-| seller_id | references | null: false, foreign_key: true |
-| buyer_id  | references | null: false, foreign_key: true |
-| item_id   | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :seller, class_name: 'User'
-- belongs_to :buyer, class_name: 'User'
-- belongs_to :item
-- has_one :order
 
 ## orders テーブル
 
-| Column           | Type       | Options                        |
-| ---------------- | ---------- | ------------------------------ |
-| item_id          | references | null: false, foreign_key: true |
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| user      | references | null: false, foreign_key: true |
+| item      | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :item
 - belongs_to :user
-
- 
+- has_one :address
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
