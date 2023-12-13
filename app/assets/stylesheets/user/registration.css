@@ -4,6 +4,7 @@
   height: 100%;
   background-color: #f5f5f5;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -157,4 +158,14 @@
   color: #0099e8;
   text-align: right;
   cursor: pointer;
+}
+.form-header-text {
+  font-size: 22px;
+  font-style: Times;
+  margin: 0 auto;
+}
+
+.furima-icon {
+  width: 10vw;
+  margin-right: 10vw;
 }
