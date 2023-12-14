@@ -7,8 +7,8 @@ class User < ApplicationRecord
   validates :nickname, presence: true
   validates :first_name_kana, presence: true
   validates :last_name_kana, presence: true
-  validates :email, presence: true
-  validates :encrypted_password, presence: true, length: { minimum: 6 }
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates_format_of :password, with: PASSWORD_REGEX, message: ' must be a mixture of alphanumeric characters' 
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :birthday, presence: true
