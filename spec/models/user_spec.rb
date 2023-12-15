@@ -10,6 +10,7 @@ RSpec.describe User, type: :model do
       it 'nicknameとemail、passwordとpassword_confirmation、first_nameとlast_name、first_name_kanaとlast_name_kanaとbirthdayが存在すれば登録できる' do
         expect(@user).to be_valid
       end
+    end
       context '新規登録できないとき' do
         it 'passwordが5文字以下では登録できない' do
           @user.password = 'abc12'
@@ -116,6 +117,4 @@ RSpec.describe User, type: :model do
           expect(@user.errors.full_messages).to include("Password  must be a mixture of alphanumeric characters")
         end
       end
-    end
   end
-end
