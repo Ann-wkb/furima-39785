@@ -13,4 +13,6 @@ class User < ApplicationRecord
   validates :last_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: ' 全角（漢字・ひらがな・カタカナ）での入力が必須' }
   validates :birthday, presence: true
   
+  has_many :items
+
 end

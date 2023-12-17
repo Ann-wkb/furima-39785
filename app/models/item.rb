@@ -1,11 +1,10 @@
 class Item < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  belongs_to :user
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable
 
   validates :images, presence: true
   validates :id, presence: true
@@ -21,4 +20,5 @@ class Item < ApplicationRecord
   validates :shipping_date_id, presence: true
   validates :create_id, presence: true
   validates :update_id, presence: true
+  
 end
