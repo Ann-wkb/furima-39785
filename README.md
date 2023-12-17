@@ -27,7 +27,7 @@
 | price             | integer    | null: false |
 | item_title        | string     | null: false |
 | item_description  | text       | null: false |
-| user              | references | null: false |
+| user              | references | null: false, foreign_key: true |
 | category_id       | integer    | null: false |
 | condition_id      | integer    | null: false |
 | shipping_cost_id  | integer    | null: false |
