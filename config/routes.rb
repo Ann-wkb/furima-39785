@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'articles/index'
-  get 'articles/new'
+  get 'items/new'
+  post 'items', to: 'items#create'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

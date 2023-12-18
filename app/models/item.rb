@@ -1,20 +1,17 @@
 class Item < ApplicationRecord
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   belongs_to :user
   has_many_attached :images
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
   belongs_to :shipping_cost
   belongs_to :prefecture
   belongs_to :shipping_date
-  has_one_attached :image
-
-
+  has_one_attached :images
   #devise :database_authenticatable, :registerable,
    #      :recoverable, :rememberable, :validatable
-
   validates :images, presence: true
   validates :price, presence: true, format: {with: /\A[a-z0-9]+\z/i, message: "is invalid. Input half-width characters."}
   validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: " Out of setting range"}
@@ -27,13 +24,6 @@ class Item < ApplicationRecord
   validates :prefecture_id, presence: true
   validates :shipping_date_id, presence: true
   
-  def images_presence
-    if images.attached?
-      if images.blank? || images.length < 1
-        errors.add(:images, '少なくとも1枚の画像を投稿してください')
-      end
-    else
-      errors.add(:image, '画像がありません')
-    end
-  end
+  
+
 end

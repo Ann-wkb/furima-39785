@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+
   def index
     @items = Item.order("created_at DESC")
   end
@@ -12,17 +13,26 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.create(item_params)
+    @item = Item.new(item_params)  
     if @item.save
+      if params[:item][:images].present?
+        @item.images.attach(params[:item][:images])
+        # 画像が添付されている場合の処理
+        # 例: 画像が添付されていれば何かしらの処理を行う
+      end
+#      if @item.image.attached?
+#        # 画像が添付されている場合の処理
+#        # 例: 画像が添付されていれば何かしらの処理を行う
+#      end
       redirect_to items_path
     else
       render :new, status: :unprocessable_entity
     end
   end
-
+  
   private
 
   def item_params
-    params.require(:item).permit(:image, :item_title, :item_description, :user, :category_id, :condition_id, :shipping_cost_id, :prefecture_id, :shipping_date_id, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:item_title, :item_description, :user, :category_id, :condition_id, :shipping_cost_id, :prefecture_id, :shipping_date_id, :price, :images).merge(user_id: current_user.id)
   end
 end
