@@ -20,7 +20,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it 'priceが空では登録できない' do
-        @item.price = 'testmail'
+        @item.price = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
@@ -69,9 +69,43 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'priceは¥300~¥9,999,999までしか登録できない' do
-        @item.price = Faker::Number.between(from: 300, to: 9_999_999)
+      it '価格が300円未満では出品できない' do
+        @item.price = Faker::Number.between(from: 0, to: 299)
         @item.valid?
+      end
+      it '価格が9_999_999円を超えると出品できない' do
+        @item.price = Faker::Number.between(from: 10_000_000, to: 99_999_999)
+        @item.valid?
+      end
+      it 'カテゴリーに「---」が選択されている場合は出品できない' do
+        @item.category_id = 0
+        @item.valid?
+      end
+      
+      it '商品の状態に「---」が選択されている場合は出品できない' do
+        @item.condition_id = 0
+        @item.valid?
+      end
+      
+      it '配送料の負担に「---」が選択されている場合は出品できない' do
+        @item.shipping_cost_id = 0
+        @item.valid?
+      end
+      
+      it '発送元の地域に「---」が選択されている場合は出品できない' do
+        @item.prefecture_id = 0
+        @item.valid?
+      end
+      
+      it '発送までの日数に「---」が選択されている場合は出品できない' do
+        @item.shipping_date_id = 0
+        @item.valid?
+      end
+      
+      it 'userが紐付いていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
