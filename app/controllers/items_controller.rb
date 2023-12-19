@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = Item.new
     if @item.save
       if params[:item][:image].present?
         @item.image.attach(params[:item][:image])
