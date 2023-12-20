@@ -2,8 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    # @items = Item.all # すべての商品を取得する例。必要に応じて条件を追加してください。
-    # @items = Item.all.order('created_at DESC')
+    @items = Item.all.order('created_at DESC')
   end
 
   def new
@@ -15,6 +14,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
+      # @items = includes(:user)
       render :new, status: :unprocessable_entity
     end
   end
