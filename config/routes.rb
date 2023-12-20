@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'items/new'
-  post 'items', to: 'items#create'
+
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,5 +9,4 @@ Rails.application.routes.draw do
   get '/items/index', to: 'items#index'
   resources :items, only: [:index, :new, :create]
 
-  resources :articles
 end
