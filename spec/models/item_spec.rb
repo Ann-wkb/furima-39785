@@ -72,10 +72,12 @@ RSpec.describe Item, type: :model do
       it '価格が300円未満では出品できない' do
         @item.price = Faker::Number.between(from: 0, to: 299)
         @item.valid?
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
       it '価格が9_999_999円を超えると出品できない' do
         @item.price = Faker::Number.between(from: 10_000_000, to: 99_999_999)
         @item.valid?
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
       it 'カテゴリーに「---」が選択されている場合は出品できない' do
         @item.category_id = 0

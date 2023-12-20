@@ -22,5 +22,4 @@ class Item < ApplicationRecord
   validates :shipping_cost_id, presence: true, numericality: { other_than: 0, message: 'Select' }
   validates :prefecture_id, presence: true, numericality: { other_than: 0, message: 'Select' }
   validates :shipping_date_id, presence: true, numericality: { other_than: 0, message: 'Select' }
-
 end
