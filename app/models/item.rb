@@ -28,6 +28,4 @@ class Item < ApplicationRecord
     # 例として、関連する Order モデルが存在するかどうかで判定する場合
     orders.exists?
   end
-
-  
 end
