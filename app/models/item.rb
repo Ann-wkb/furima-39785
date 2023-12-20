@@ -18,8 +18,9 @@ class Item < ApplicationRecord
   validates :category_id, presence: true, numericality: { other_than: 0, message: 'Select' }
   validates :item_title, presence: true
   validates :item_description, presence: true
-  validates :condition_id, presence: true
-  validates :shipping_cost_id, presence: true
-  validates :prefecture_id, presence: true
-  validates :shipping_date_id, presence: true
+  validates :condition_id, presence: true, numericality: { other_than: 0, message: 'Select' }
+  validates :shipping_cost_id, presence: true, numericality: { other_than: 0, message: 'Select' }
+  validates :prefecture_id, presence: true, numericality: { other_than: 0, message: 'Select' }
+  validates :shipping_date_id, presence: true, numericality: { other_than: 0, message: 'Select' }
+
 end
