@@ -12,8 +12,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :first_name_kana,    null: false, default: ""
       t.string :last_name_kana,     null: false, default: ""
       t.date   :birthday,           null: false
-    end
-  end
+
 
       ## Recoverable
       t.string   :reset_password_token
@@ -39,6 +38,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
+
 
 
       t.timestamps null: false
