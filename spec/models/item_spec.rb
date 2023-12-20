@@ -80,28 +80,28 @@ RSpec.describe Item, type: :model do
       it 'カテゴリーに「---」が選択されている場合は出品できない' do
         @item.category_id = 0
         @item.valid?
+        expect(@item.errors.full_messages).to include('Category Select')
       end
-
       it '商品の状態に「---」が選択されている場合は出品できない' do
         @item.condition_id = 0
         @item.valid?
+        expect(@item.errors.full_messages).to include('Condition Select')
       end
-
       it '配送料の負担に「---」が選択されている場合は出品できない' do
         @item.shipping_cost_id = 0
         @item.valid?
+        expect(@item.errors.full_messages).to include('Shipping cost Select')
       end
-
       it '発送元の地域に「---」が選択されている場合は出品できない' do
         @item.prefecture_id = 0
         @item.valid?
+        expect(@item.errors.full_messages).to include('Prefecture Select')
       end
-
       it '発送までの日数に「---」が選択されている場合は出品できない' do
         @item.shipping_date_id = 0
         @item.valid?
+        expect(@item.errors.full_messages).to include('Shipping date Select')
       end
-
       it 'userが紐付いていなければ出品できない' do
         @item.user = nil
         @item.valid?
