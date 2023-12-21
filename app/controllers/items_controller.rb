@@ -9,6 +9,10 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
+  def show
+    @item = Item.find(params[:id])
+  end
+
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -18,6 +22,25 @@ class ItemsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def edit
+  end
+
+  def update
+    if @item.save
+      redirect_to item_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    if current_user.id == @item.user_id
+       @item.destroy
+      end
+       redirect_to root_path
+  end
+
 
   private
 
