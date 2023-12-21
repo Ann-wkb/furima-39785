@@ -129,11 +129,9 @@
       <% if  @items.present? %>
       <% @items.each do |item| %>
       <li class='list'>
-        <%= link_to "#" do %>
-        <%#= link_to item_path(item.id) do 今後の実装で使う記述%>
+        <%= link_to item_path(item.id) do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img"  %>
-
           <%# 商品が売れていればsold outを表示しましょう %>
           <%# if  item.ordered? 購入機能実装後%>
           <%#  <div class='sold-out' 購入機能実装後>
