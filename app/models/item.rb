@@ -21,7 +21,7 @@ class Item < ApplicationRecord
   validates :item_description, presence: true
   validates :condition_id, presence: true, numericality: { other_than: 0, message: 'Select' }
   validates :shipping_cost_id, presence: true, numericality: { other_than: 0, message: 'Select' }
-  validates :prefecture_id, presence: true, numericality: { other_than: 1, message: 'Select' }
+  validates :prefecture_id, presence: true, numericality: { other_than: 0, message: 'Select' }
   validates :shipping_date_id, presence: true, numericality: { other_than: 0, message: 'Select' }
 
 #  def ordered?
