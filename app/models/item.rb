@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
-  #has_one :order
+  # has_one :order
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_date
   has_one_attached :image
+  belongs_to_active_hash :prefecture
   # devise :database_authenticatable, :registerable,
   #      :recoverable, :rememberable, :validatable
   validates :image, presence: true
@@ -23,9 +24,9 @@ class Item < ApplicationRecord
   validates :prefecture_id, presence: true, numericality: { other_than: 0, message: 'Select' }
   validates :shipping_date_id, presence: true, numericality: { other_than: 0, message: 'Select' }
 
-#  def ordered?
-#    # 注文があるかどうかを判定するロジックを追加
-#    # 例として、関連する Order モデルが存在するかどうかで判定する場合
-#    orders.exists?
-#  end
+  #  def ordered?
+  #    # 注文があるかどうかを判定するロジックを追加
+  #    # 例として、関連する Order モデルが存在するかどうかで判定する場合
+  #    orders.exists?
+  #  end
 end
