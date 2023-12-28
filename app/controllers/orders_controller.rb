@@ -1,9 +1,13 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  
 
   def index
     item_id = params[:item_id]
     @item = Item.find(item_id)
+    if current_user == @item.user
+      redirect_to root_path
+    end
   end
 
   def new
@@ -18,7 +22,7 @@ class OrdersController < ApplicationController
       # フォームがバリデーションを通過した場合の処理
       # 例えば、OrderForm モデルに基づいて Order レコードを作成するなど
     else
-      render :new
+      render :index
     end
   end
 
