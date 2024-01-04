@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  
 
   def index
     item_id = params[:item_id]
     @item = Item.find(item_id)
+    @order_form = OrderForm.new
     if current_user == @item.user
       redirect_to root_path
     end
