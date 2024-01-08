@@ -1,8 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
-  # has_one :order
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_one :order
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
@@ -11,8 +10,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_date
   has_one_attached :image
   belongs_to_active_hash :prefecture
-  # devise :database_authenticatable, :registerable,
-  #      :recoverable, :rememberable, :validatable
+
   validates :image, presence: true
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' },
                     format: { with: /\A[0-9]+\z/, message: 'is invalid. Input half-width characters.' }
