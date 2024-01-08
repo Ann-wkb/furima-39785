@@ -82,22 +82,22 @@ RSpec.describe OrderForm, type: :model do
       it 'phoneが半角数値でないと登録できない' do
         @order_form.phone = '０9012341234'
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Price Out of setting range')
+        expect(@order_form.errors.full_messages).to include('Phone is invalid. Enter a 10 to 11 digit number without hyphens')
       end
       it 'phoneに数字以外の文字（平仮名・漢字・英字・記号）が含まれていると登録できない' do
         @order_form.phone = 'あアA;'
-        order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Phone is invalid')
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include('Phone is invalid. Enter a 10 to 11 digit number without hyphens')
       end
       it 'phoneが9桁以下では保存できないこと' do
         @order_form.phone = '123456789'
-        order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Phone number is too short')
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include('Phone is invalid. Enter a 10 to 11 digit number without hyphens')
       end
       it 'phoneが12桁以上だと保存できないこと' do
         @order_form.phone = '123456789000'
-        order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Phone number is too long')
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include('Phone is invalid. Enter a 10 to 11 digit number without hyphens')
       end
 
       it 'トークンが空だと保存できないこと' do
