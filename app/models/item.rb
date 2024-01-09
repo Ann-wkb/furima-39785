@@ -9,7 +9,6 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_date
   has_one_attached :image
-  belongs_to_active_hash :prefecture
 
   validates :image, presence: true
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' },
