@@ -9,7 +9,5 @@ FactoryBot.define do
     phone { Faker::Number.decimal_part(digits: 11) }
     token { 'tok_abcdefghijk00000000000000000' }
     
-    association :user_id
-    association :item_id
   end
 end
