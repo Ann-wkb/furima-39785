@@ -4,7 +4,6 @@ class OrdersController < ApplicationController
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @item = Item.find(params[:item_id])
     @order_form = OrderForm.new
     if current_user == @item.user
       redirect_to root_path
@@ -12,14 +11,11 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_form = OrderForm.new(order_params)
     if @order_form.valid?
       pay_item
       @order_form.save
       redirect_to root_path
-      # フォームがバリデーションを通過した場合の処理
-      # 例えば、OrderForm モデルに基づいて Order レコードを作成するなど
     else
       render :index
     end
