@@ -102,6 +102,16 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include('Phone is invalid. Enter a 10 to 11 digit number without hyphens')
       end
+      it '都道府県が「---」の場合は保存できない' do
+        @order_form.prefecture_id = 0
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it '郵便番号が半角ハイフンを含む形でなければ保存できない' do
+        @order_form.postal_code = '1234560'
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Postal code is invalid. Enter it as follows (e.g. 123-4567)")
+      end
 
       it 'トークンが空だと保存できないこと' do
         @order_form.token = nil
