@@ -6,12 +6,14 @@ class OrderForm
   validates :user_id, presence: true
   validates :item_id, presence: true
 
-  validates :postal_code, presence: true, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Enter it as follows (e.g. 123-4567)" }
-  validates :prefecture_id, presence: true, numericality: {other_than: 0, message: "can't be blank"}
-  validates :city, presence: true
-  validates :street, presence: true
-  validates :phone, presence: true, format: { with: /\A[0-9]{10,11}\z/, message: 'is invalid. Enter a 10 to 11 digit number without hyphens' }
-
+  with_options presence: true do
+    validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Enter it as follows (e.g. 123-4567)" }
+    validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
+    validates :city
+    validates :street
+    validates :phone, format: { with: /\A[0-9]{10,11}\z/, message: 'is invalid. Enter a 10 to 11 digit number without hyphens' }
+  end
+  
   validates :token, presence: true
   
   def save
