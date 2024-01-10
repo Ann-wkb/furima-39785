@@ -10,6 +10,5 @@ class CreateAddresses < ActiveRecord::Migration[7.0]
       t.references :order,           null: false, foreign_key: true
 
       t.timestamps
-    end
   end
 end
