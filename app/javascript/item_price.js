@@ -9,6 +9,6 @@ window.addEventListener('turbo:load', () => {
       addTaxDom.innerHTML= Math.floor(priceInput.value * 0.1 ).toLocaleString();;
 
       const addPofitDom = document.getElementById("profit");
-      addPofitDom.innerHTML = Math.floor(priceInput.value - Math.round(priceInput.value * 0.1 )).toLocaleString();
+      addPofitDom.innerHTML = Math.floor(priceInput.value - Math.floor(priceInput.value * 0.1 )).toLocaleString();
     })
 });
